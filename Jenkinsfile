@@ -24,14 +24,19 @@ pipeline {
          }
          stage('Build') {
              steps {
-                 docker.build('cloud_devops_capstone')
+                script{
+                     docker.build('cloud_devops_capstone')
+                }
              }
          }
          stage('Docker push') {
             steps {
-                docker.withRegistry('https://937431759388.dkr.ecr.us-east-2.amazonaws.com', 'ecr:jenkins') {
-                    docker.image('cloud_devops_capstone').push('latest')
+                script{
+                    docker.withRegistry('https://937431759388.dkr.ecr.us-east-2.amazonaws.com', 'ecr:jenkins') {
+                        docker.image('cloud_devops_capstone').push('latest')
+                    } 
                 }
+                
             }
          }
      }
