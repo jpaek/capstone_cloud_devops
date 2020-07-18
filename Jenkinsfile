@@ -4,16 +4,20 @@ pipeline {
      stages {
          stage('Install Dependency') {
              steps {
-                 make setup
-                 make install
-                 wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
-                 chmod +x /bin/hadolint
+                sh '''
+                make setup
+                make install
+                wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
+                chmod +x /bin/hadolint
+                '''
              }
          }
          stage('Lint') {
              steps {
+                sh '''
                  . venv/bin/activate
                  make lint
+                '''
              }
          }
          stage('Build') {
