@@ -7,8 +7,8 @@
 
 setup:
 	# Create python virtualenv & source it
-	python3 -m venv ~/.devops
-	source ~/.devops/bin/activate
+	python3 -m venv /var/lib/jenkins/.devops
+	source /var/lib/jenkins/.devops/bin/activate
 
 install:
 	# This should be run from inside a virtualenv
