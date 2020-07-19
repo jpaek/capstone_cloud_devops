@@ -4,6 +4,7 @@ node {
 
     stage('Lint')
         sh 'whoami'
+        sh 'ls ~/'
         docker.image('python:3.7.3').inside {
             sh '''
             pip install -r requirements.txt
