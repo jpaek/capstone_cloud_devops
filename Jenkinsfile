@@ -1,15 +1,13 @@
 node {
     stage 'Checkout'
     git url: 'https://github.com/jpaek/capstone_cloud_devops.git'
-    
-    stage('Install Dependency')
+
+    stage('Lint')
     sh '''
     make setup
     make install
-    '''
-    
-    stage('Lint')
     make lint
+    '''
     
     stage('Build') {
         docker.build('cloud_devops_capstone')
