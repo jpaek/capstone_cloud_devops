@@ -7,8 +7,8 @@
 
 setup:
 	# Create python virtualenv & source it
-	virtualenv .env
-	source .env/bin/activate
+	virtualenv ~/.capstone
+	source ~/.capstone/bin/activate
 
 install:
 	# This should be run from inside a virtualenv
