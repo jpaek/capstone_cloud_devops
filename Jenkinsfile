@@ -9,7 +9,7 @@ node {
     //         make install
     //         make lint
     //         '''
-        }
+    //     }
 
     stage('Build') {
         docker.build('cloud_devops_capstone')
