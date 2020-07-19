@@ -3,6 +3,7 @@ node {
     git url: 'https://github.com/jpaek/capstone_cloud_devops.git'
 
     stage('Lint')
+        sh 'whoami'
         docker.image('python:3.7.3-stretch').inside {
             sh '''
             make setup
