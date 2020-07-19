@@ -6,8 +6,8 @@ node {
         sh 'whoami'
         docker.image('python:3.7.3-stretch').inside {
             sh '''
-            python3 -m venv  /home/jenkins/.capstone
-            source /home/jenkins/.capstone/bin/activate
+            python3 -m venv  /var/lib/jenkins/.capstone
+            source /var/lib/jenkins/.capstone/bin/activate
             pip install pylint
             make lint
             '''
