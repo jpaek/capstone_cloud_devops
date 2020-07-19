@@ -7,7 +7,6 @@ node {
     make install
     
     stage('Lint') {
-    . venv/bin/activate
     make lint
     
     stage('Build') {
