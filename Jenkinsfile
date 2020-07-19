@@ -1,25 +1,23 @@
-pipeline {
+node {
 
-     agent any
-     stages {
+         stage('Install Dependency') {
+                sh 'make setup'
+                sh 'make install'
+                sh'''
+                wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
+                chmod +x /bin/hadolint
+                '''
+         }
+         stage('Lint') {
+                 sh '. venv/bin/activate'
+                 sh 'make lint'
+         }
          stage('Build') {
-             steps {
-                 sh 'echo "Hello World"'
-                 sh '''
-                     echo "Multiline shell steps works too"
-                     ls -lah
-                 '''
-             }
+             docker.build('cloud_devops_capstone')
          }
-         stage('Lint HTML') {
-              steps {
-                  sh 'tidy -q -e *.html'
-              }
+         stage('Docker push') {
+            docker.withRegistry('https://937431759388.dkr.ecr.us-east-2.amazonaws.com', 'ecr:jenkins') {
+                        docker.image('cloud_devops_capstone').push('latest')
+                    } 
          }
-         stage('Security Scan') {
-              steps { 
-                 aquaMicroscanner imageName: 'alpine:latest', notCompleted: 'exit 1', onDisallowed: 'fail'
-              }
-         }         
-     }
 }
