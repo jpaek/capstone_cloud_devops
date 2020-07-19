@@ -4,14 +4,10 @@ node {
 
     stage('Lint')
         sh 'whoami'
-        sh 'ls ~/'
-        docker.image('python:3.7.3').inside {
+        docker.image('python:3.7.3-stretch').inside {
             sh '''
-            pip install -r requirements.txt
-            wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
-            chmod +x /bin/hadolint
-            hadolint Dockerfile
-            pylint --disable=R,C,W1203 web.py
+            make install
+            make lint
             '''
         }
 
