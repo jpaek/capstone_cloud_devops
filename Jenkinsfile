@@ -6,6 +6,7 @@ node {
         sh 'whoami'
         docker.image('python:3.7.3-stretch').inside {
             sh '''
+            pip install pylint
             make lint
             '''
         }
