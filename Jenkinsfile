@@ -6,7 +6,7 @@ node {
         sh 'whoami'
         docker.image('python:3.7.3-stretch').inside {
             sh '''
-            virtualenv ~/.capstone
+            python3 -m venv  ~/.capstone
             source ~/.capstone/bin/activate
             pip install pylint
             make lint
