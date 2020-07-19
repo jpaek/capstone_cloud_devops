@@ -2,18 +2,15 @@ node {
     stage 'Checkout'
     git url: 'https://github.com/jpaek/capstone_cloud_devops.git'
     
-    stage('Install Dependency') {
-        sh 'make setup'
-        sh 'make install'
-        sh'''
-        wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
-        chmod +x /bin/hadolint
-        '''
-    }
+    stage('Install Dependency')
+    make setup
+    make install
+    wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 && chmod +x /bin/hadolint
+    
     stage('Lint') {
-        sh '. venv/bin/activate'
-        sh 'make lint'
-    }
+    . venv/bin/activate
+    make lint
+    
     stage('Build') {
         docker.build('cloud_devops_capstone')
     }
