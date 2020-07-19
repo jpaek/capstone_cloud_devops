@@ -6,7 +6,6 @@ node {
         sh 'whoami'
         docker.image('python:3.7.3-stretch').inside {
             sh '''
-            make install
             make lint
             '''
         }
