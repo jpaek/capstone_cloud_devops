@@ -2,14 +2,14 @@ node {
     stage 'Checkout'
     git url: 'https://github.com/jpaek/capstone_cloud_devops.git'
 
-    // stage('Lint')
-    //     docker.image('python:3.7.3-stretch').inside {
-    //         sh '''
-    //         make setup
-    //         make install
-    //         make lint
-    //         '''
-    //     }
+    stage('Lint')
+        docker.image('python:3.7.3-stretch').inside {
+            sh '''
+            make setup
+            make install
+            make lint
+            '''
+        }
 
     stage('Build') {
         docker.build('cloud_devops_capstone')
