@@ -6,7 +6,7 @@ node {
     make setup
     make install
     
-    stage('Lint') {
+    stage('Lint')
     make lint
     
     stage('Build') {
