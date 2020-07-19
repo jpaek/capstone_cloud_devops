@@ -3,8 +3,10 @@ node {
     git url: 'https://github.com/jpaek/capstone_cloud_devops.git'
     
     stage('Install Dependency')
+    sh '''
     make setup
     make install
+    '''
     
     stage('Lint')
     make lint
