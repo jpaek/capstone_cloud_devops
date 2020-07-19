@@ -1,4 +1,4 @@
-node('docker') {
+node {
     stage 'Checkout'
     git url: 'https://github.com/jpaek/capstone_cloud_devops.git'
 
