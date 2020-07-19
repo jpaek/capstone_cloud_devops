@@ -1,18 +1,16 @@
 node {
 
          stage('Install Dependency') {
-                sh '''
-                make setup
-                make install
+                sh 'make setup'
+                sh 'make install'
+                sh'''
                 wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
                 chmod +x /bin/hadolint
                 '''
          }
          stage('Lint') {
-                sh '''
-                 . venv/bin/activate
-                 make lint
-                '''
+                 sh '. venv/bin/activate'
+                 sh 'make lint'
          }
          stage('Build') {
              docker.build('cloud_devops_capstone')
