@@ -2,16 +2,9 @@ node {
     stage 'Checkout'
     git url: 'https://github.com/jpaek/capstone_cloud_devops.git'
 
-    stage('Lint')
-        sh 'whoami'
-        docker.image('python:3.7.3-stretch').inside {
-            sh '''
-            python3 -m venv  /var/lib/jenkins/.capstone
-            source /var/lib/jenkins/.capstone/bin/activate
-            pip install pylint
-            make lint
-            '''
-        }
+    stage('Lint') {
+        sh 'tidy -q -e *.html'
+    }
 
     stage('Build') {
         docker.build('cloud_devops_capstone')
